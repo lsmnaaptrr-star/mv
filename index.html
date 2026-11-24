@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vape Store</title>
+<style id="app-css">
+:root{--bg:#fafafa;--card:#fff;--tx:#18181b;--mut:#71717a;--bd:#e7e7ea;--ac:#18181b;--ac2:#fff;--wa:#16a34a;--dg:#dc2626;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e0e11;--card:#18181c;--tx:#f4f4f5;--mut:#a1a1aa;--bd:#2a2a30;--ac:#f4f4f5;--ac2:#18181b;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e0e11;--card:#18181c;--tx:#f4f4f5;--mut:#a1a1aa;--bd:#2a2a30;--ac:#f4f4f5;--ac2:#18181b;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding-bottom:90px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:40}
+#root{max-width:640px;margin:0 auto}
+.wrap{padding:0 14px}
+.cover{height:150px;background:linear-gradient(135deg,#3f3f46,#18181b);overflow:hidden}
+.cover img,.av img{width:100%;height:100%;object-fit:cover;display:block}
+.av{width:84px;height:84px;border-radius:50%;border:4px solid var(--bg);background:var(--ac);color:var(--ac2);margin-top:-42px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:800}
+h1{margin:8px 0 0;font-size:22px}.mut{color:var(--mut);font-size:13px}
+.box{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px;margin:14px 0;display:flex;flex-direction:column;gap:10px}
+.clk{font-size:30px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1}
+.st{padding:3px 10px;border-radius:99px;font-size:12px;font-weight:700;color:#fff}.st.on{background:var(--wa)}.st.off{background:var(--dg)}
+.r{display:flex;justify-content:space-between;align-items:center;gap:10px}
+input,select{width:100%;padding:10px 12px;border:1px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--tx);font:inherit}
+.chips{display:flex;gap:8px;overflow-x:auto;margin:10px 0}
+.chip{border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:6px 14px;border-radius:99px;white-space:nowrap;cursor:pointer;font:inherit}
+.chip.on{background:var(--ac);color:var(--ac2);border-color:var(--ac)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.ph{aspect-ratio:1;background:linear-gradient(135deg,#52525b,#27272a);display:flex;align-items:center;justify-content:center;font-size:40px;position:relative}
+.ph img{width:100%;height:100%;object-fit:cover}
+.tg{position:absolute;top:8px;left:8px;background:#000b;color:#fff;font-size:11px;padding:2px 8px;border-radius:99px}.tg.d{background:var(--dg);left:auto;right:8px}
+.cb{padding:10px;display:flex;flex-direction:column;gap:4px;flex:1}
+.nm{font-weight:700;line-height:1.25}.old{color:var(--mut);text-decoration:line-through;font-size:13px}.pr{font-weight:800}
+.btn{border:0;border-radius:10px;padding:9px 12px;font:inherit;font-weight:600;font-size:13px;cursor:pointer;background:var(--ac);color:var(--ac2);text-align:center;text-decoration:none;display:block}
+.btn.wa{background:var(--wa);color:#fff}.btn.g{background:transparent;color:var(--tx);border:1px solid var(--bd)}.btn.d{background:var(--dg);color:#fff}.btn[disabled]{opacity:.5}
+.cb .btn{width:100%}.cb .btn:first-of-type{margin-top:auto}
+.row{display:flex;gap:6px}.row .btn{flex:1}
+.adm{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--ac);color:var(--ac2);padding:8px 12px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.adm .btn{background:var(--ac2);color:var(--ac);padding:6px 10px}
+.fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:20;background:var(--ac);color:var(--ac2);border:0;border-radius:99px;padding:14px 18px;font:inherit;font-weight:700;cursor:pointer;box-shadow:0 4px 16px #0004}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;padding:16px;z-index:50}
+.md{background:var(--card);border-radius:16px;padding:18px;max-width:420px;width:100%;max-height:90%;overflow:auto;display:flex;flex-direction:column;gap:10px}
+.md h2{margin:0;font-size:18px}label{font-size:12px;color:var(--mut);display:block;margin-bottom:3px}
+.ci{display:flex;gap:8px;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bd);padding-bottom:8px}
+.q{display:flex;gap:8px;align-items:center}.q button{width:28px;height:28px;border-radius:8px;border:1px solid var(--bd);background:none;color:var(--tx);cursor:pointer}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:90px;background:#000d;color:#fff;padding:10px 16px;border-radius:10px;z-index:60;max-width:90%;display:none;text-align:center}
+.foot{text-align:center;margin:24px 0}.foot a{text-decoration:underline;cursor:pointer}.empty{grid-column:1/-1;text-align:center;color:var(--mut);padding:30px 0}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<div id="modal"></div>
+<div id="toast"></div>
+<script type="application/json" id="data">{"shop":{"name":"Vape Store","tag":"Liquid, pod & aksesori. Pesan cepat via WhatsApp","wa":"6281234567890","address":"Jl. Contoh No. 1, Jakarta","days":"Setiap hari","open":"10:00","close":"22:00","tz":"Asia/Jakarta","pinHash":"","profile":"","cover":""},"products":[{"id":1,"name":"Liquid Creamy Vanilla 60ml","cat":"Liquid","price":120000,"disc":0,"stock":true,"img":""},{"id":2,"name":"Liquid Fresh Mint 60ml","cat":"Liquid","price":115000,"disc":8,"stock":true,"img":""},{"id":3,"name":"Salt Nic Berry 30ml","cat":"Salt Nic","price":130000,"disc":0,"stock":true,"img":""},{"id":4,"name":"Pod System Starter Kit","cat":"Pod","price":250000,"disc":10,"stock":true,"img":""},{"id":5,"name":"Mod Box 80W","cat":"Mod","price":450000,"disc":0,"stock":false,"img":""},{"id":6,"name":"Coil Pengganti 5pcs","cat":"Aksesori","price":75000,"disc":0,"stock":true,"img":""}]}</script>
+<script id="app-js">
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const rp=n=>'Rp'+Number(n||0).toLocaleString('id-ID');
+const fin=p=>p.disc?Math.round(p.price*(1-p.disc/100)/100)*100:p.price;
+const TZL={'Asia/Jakarta':'WIB','Asia/Makassar':'WITA','Asia/Jayapura':'WIT'};
+let S=JSON.parse($('data').textContent),edit=false,dirty=false,cart={},F={q:'',cat:'Semua'},art=null,ask_cb=null;
+try{edit=sessionStorage.getItem('adm')==='1'}catch(e){}
+try{cart=JSON.parse(localStorage.getItem('vs-cart')||'{}')}catch(e){}
+if(window.claude&&claude.use){claude.use('artifact').then(a=>art=a).catch(()=>{})}
+const saveCart=()=>{try{localStorage.setItem('vs-cart',JSON.stringify(cart))}catch(e){}};
+const num=()=>String(S.shop.wa).replace(/\D/g,'');
+const wa=t=>'https://wa.me/'+num()+'?text='+encodeURIComponent(t);
+function toast(t){const e=$('toast');e.textContent=t;e.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>e.style.display='none',3500)}
+function modal(h){$('modal').innerHTML='<div class="ov"><div class="md">'+h+'</div></div>'}
+const close=()=>$('modal').innerHTML='';
+function ask(t,fn){ask_cb=fn;modal('<h2>Konfirmasi</h2><div>'+esc(t)+'</div><div class="row"><button class="btn g" data-a="x">Batal</button><button class="btn d" data-a="yes">Ya</button></div>')}
+async function hash(s){try{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('vs:'+s));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}catch(e){return'p:'+s}}
+function fit(file,max,cb){const r=new FileReader();r.onload=()=>{const i=new Image();i.onload=()=>{const k=Math.min(1,max/Math.max(i.width,i.height)),c=document.createElement('canvas');c.width=i.width*k;c.height=i.height*k;c.getContext('2d').drawImage(i,0,0,c.width,c.height);cb(c.toDataURL('image/jpeg',.75))};i.src=r.result};r.readAsDataURL(file)}
+function mark(){dirty=true;const d=$('dirty');if(d)d.textContent='● belum disimpan'}
+function buildDoc(){
+  const j=JSON.stringify(S).replace(/</g,'\\u003c');
+  return '<!DOCTYPE html>\n<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>'+esc(S.shop.name)+'</title><style id="app-css">'+$('app-css').textContent+'</style></head><body><div id="root"></div><div id="modal"></div><div id="toast"></div><script type="application/json" id="data">'+j+'<\/script><script id="app-js">'+$('app-js').textContent+'<\/script></body></html>';
+}
+async function saveAll(){
+  if(!art){toast('Penyimpanan online belum aktif. Buka link ini lewat akun Claude pemilik halaman.');return}
+  try{await art.publish(buildDoc());dirty=false;toast('Tersimpan untuk semua pengguna. Memuat ulang…')}
+  catch(e){const c=e&&e.code;toast(c==='not_granted'||c==='not_writer'?'Gagal menyimpan: masuk dulu ke akun Claude pemilik halaman ini, lalu tekan Simpan lagi.':c==='conflict'?'Ada versi baru, halaman dimuat ulang.':'Gagal menyimpan. Coba lagi.')}
+}
+function renderAll(){
+  const s=S.shop;
+  $('root').innerHTML=(edit?'<div class="adm"><b>Admin</b><span id="dirty" style="font-size:12px"></span><button class="btn" data-a="new">+ Produk</button><button class="btn" data-a="set">Pengaturan</button><button class="btn" data-a="save">Simpan</button><button class="btn" data-a="out">Keluar</button></div>':'')+
+  '<div class="cover">'+(s.cover?'<img alt="" src="'+esc(s.cover)+'">':'')+'</div><div class="wrap"><div class="av">'+(s.profile?'<img alt="" src="'+esc(s.profile)+'">':esc((s.name||'V')[0].toUpperCase()))+'</div>'+
+  '<h1>'+esc(s.name)+'</h1><div class="mut">'+esc(s.tag)+'</div>'+
+  '<div class="box"><div class="r"><div><div class="clk" id="clk">--:--:--</div><div class="mut" id="dt"></div></div><span class="st" id="st"></span></div>'+
+  '<div class="r"><div><b>Jam operasional</b><div class="mut">'+esc(s.days)+' · '+esc(s.open)+' – '+esc(s.close)+' '+(TZL[s.tz]||'')+'</div></div></div>'+
+  '<div class="r"><div><b>Lokasi</b><div class="mut">'+esc(s.address)+'</div></div><a class="btn g" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(s.address)+'">Maps</a></div>'+
+  '<a class="btn wa" target="_blank" rel="noopener" href="'+wa('Halo '+s.name+', saya mau bertanya.')+'">Chat WhatsApp</a></div>'+
+  '<input id="q" placeholder="Cari produk…" value="'+esc(F.q)+'"><div class="chips" id="chips"></div><div class="grid" id="grid"></div>'+
+  '<div class="foot mut">Khusus usia 21 tahun ke atas.'+(edit?'':'<br><a data-a="login">Admin</a>')+'</div></div>'+
+  '<button class="fab" data-a="cart">🛒 Keranjang (<span id="cb">0</span>)</button>';
+  $('q').oninput=e=>{F.q=e.target.value;renderList()};
+  renderList();tick();if(dirty)mark();
+}
+function renderList(){
+  const cats=['Semua',...new Set(S.products.map(p=>p.cat).filter(Boolean))];if(!cats.includes(F.cat))F.cat='Semua';
+  $('chips').innerHTML=cats.map(c=>'<button class="chip'+(c===F.cat?' on':'')+'" data-c="'+esc(c)+'">'+esc(c)+'</button>').join('');
+  const l=S.products.filter(p=>(F.cat==='Semua'||p.cat===F.cat)&&p.name.toLowerCase().includes(F.q.toLowerCase()));
+  $('grid').innerHTML=l.length?l.map(p=>'<div class="card"><div class="ph">'+(p.img?'<img alt="" src="'+esc(p.img)+'">':'💨')+(p.stock?'':'<span class="tg">Habis</span>')+(p.disc?'<span class="tg d">-'+p.disc+'%</span>':'')+'</div><div class="cb"><div class="nm">'+esc(p.name)+'</div>'+(p.disc?'<div class="old">'+rp(p.price)+'</div>':'')+'<div class="pr">'+rp(fin(p))+'</div>'+
+    (p.stock?'<button class="btn" data-a="add" data-id="'+p.id+'">+ Keranjang</button><a class="btn wa" target="_blank" rel="noopener" href="'+wa('Halo '+S.shop.name+', saya mau pesan:\n'+p.name+'\nHarga: '+rp(fin(p))+'\nJumlah: 1')+'">Pesan WhatsApp</a>':'<button class="btn" disabled>Stok habis</button>')+
+    (edit?'<div class="row"><button class="btn g" data-a="edit" data-id="'+p.id+'">Edit</button><button class="btn d" data-a="del" data-id="'+p.id+'">Hapus</button></div>':'')+'</div></div>').join(''):'<div class="empty">Produk tidak ditemukan.</div>';
+  $('cb').textContent=Object.values(cart).reduce((a,b)=>a+b,0);
+}
+function tick(){
+  const c=$('clk');if(!c)return;const tz=S.shop.tz||'Asia/Jakarta',d=new Date();
+  let t,n;try{t=d.toLocaleTimeString('en-GB',{timeZone:tz,hourCycle:'h23'});$('dt').textContent=d.toLocaleDateString('id-ID',{timeZone:tz,weekday:'long',day:'numeric',month:'long',year:'numeric'})}catch(e){t=d.toTimeString().slice(0,8)}
+  c.textContent=t;
+  const m=x=>{const a=String(x).split(':');return(+a[0])*60+(+a[1]||0)};
+  n=m(t.slice(0,5));const o=m(S.shop.open),e=m(S.shop.close);
+  const op=o<=e?(n>=o&&n<e):(n>=o||n<e);const st=$('st');st.textContent=op?'Buka':'Tutup';st.className='st '+(op?'on':'off');
+}
+setInterval(tick,1000);
+function cartM(){
+  const it=Object.keys(cart).map(id=>({p:S.products.find(x=>x.id==id),q:cart[id]})).filter(x=>x.p);
+  if(!it.length){modal('<h2>Keranjang</h2><div class="mut">Keranjang masih kosong.</div><button class="btn g" data-a="x">Tutup</button>');return}
+  const tot=it.reduce((a,x)=>a+fin(x.p)*x.q,0);
+  const msg='Halo '+S.shop.name+', saya mau pesan:\n'+it.map(x=>'- '+x.p.name+' x'+x.q+' = '+rp(fin(x.p)*x.q)).join('\n')+'\nTotal: '+rp(tot);
+  modal('<h2>Keranjang</h2>'+it.map(x=>'<div class="ci"><div><b>'+esc(x.p.name)+'</b><div class="mut">'+rp(fin(x.p))+'</div></div><div class="q"><button data-a="minus" data-id="'+x.p.id+'">−</button>'+x.q+'<button data-a="plus" data-id="'+x.p.id+'">+</button></div></div>').join('')+'<b>Total: '+rp(tot)+'</b><a class="btn wa" target="_blank" rel="noopener" href="'+wa(msg)+'">Pesan semua via WhatsApp</a><div class="row"><button class="btn g" data-a="clear">Kosongkan</button><button class="btn g" data-a="x">Tutup</button></div>');
+}
+function loginM(){modal('<h2>Masuk Admin</h2><div><label>PIN (awal: 1234)</label><input id="pin" type="password" inputmode="numeric" autocomplete="off"></div><div class="row"><button class="btn g" data-a="x">Batal</button><button class="btn" id="ok">Masuk</button></div>');
+  $('ok').onclick=async()=>{const v=$('pin').value,hv=await hash(v);if(S.shop.pinHash?hv===S.shop.pinHash:v==='1234'){edit=true;try{sessionStorage.setItem('adm','1')}catch(e){}close();renderAll()}else toast('PIN salah')}}
+function prodM(id){
+  const p=S.products.find(x=>x.id===id)||{name:'',cat:'',price:'',disc:0,stock:true,img:''};let img=p.img;
+  modal('<h2>'+(id?'Edit':'Tambah')+' Produk</h2><div><label>Foto</label><input type="file" id="f" accept="image/*"></div><div><label>Nama</label><input id="n" value="'+esc(p.name)+'"></div><div><label>Kategori</label><input id="c" value="'+esc(p.cat)+'" placeholder="Liquid, Pod, Mod…"></div><div><label>Harga normal (angka)</label><input id="p" type="number" inputmode="numeric" value="'+esc(p.price)+'"></div><div><label>Diskon (%)</label><input id="d" type="number" inputmode="numeric" value="'+esc(p.disc)+'"></div><div><label>Stok</label><select id="s"><option value="1"'+(p.stock?' selected':'')+'>Tersedia</option><option value="0"'+(p.stock?'':' selected')+'>Habis</option></select></div><div class="row"><button class="btn g" data-a="x">Batal</button><button class="btn" id="ok">Simpan</button></div>');
+  $('f').onchange=e=>e.target.files[0]&&fit(e.target.files[0],480,d=>img=d);
+  $('ok').onclick=()=>{const o={id:p.id||Date.now(),name:$('n').value.trim()||'Produk',cat:$('c').value.trim(),price:+$('p').value||0,disc:Math.min(90,Math.max(0,+$('d').value||0)),stock:$('s').value==='1',img};
+    S.products=id?S.products.map(x=>x.id===id?o:x):[...S.products,o];mark();close();renderList()};
+}
+function setM(){
+  const s=S.shop;let pf=s.profile,cv=s.cover;
+  modal('<h2>Pengaturan Toko</h2><div><label>Foto profil</label><input type="file" id="f1" accept="image/*"></div><div><label>Foto sampul</label><input type="file" id="f2" accept="image/*"></div><div><label>Nama toko</label><input id="n" value="'+esc(s.name)+'"></div><div><label>Deskripsi singkat</label><input id="t" value="'+esc(s.tag)+'"></div><div><label>Nomor WhatsApp (format 62812…)</label><input id="w" inputmode="numeric" value="'+esc(s.wa)+'"></div><div><label>Alamat / lokasi</label><input id="ad" value="'+esc(s.address)+'"></div><div><label>Hari buka</label><input id="dy" value="'+esc(s.days)+'"></div><div class="row"><div><label>Jam buka</label><input id="o" type="time" value="'+esc(s.open)+'"></div><div><label>Jam tutup</label><input id="c" type="time" value="'+esc(s.close)+'"></div></div><div><label>Zona waktu toko</label><select id="z">'+Object.keys(TZL).map(k=>'<option value="'+k+'"'+(k===s.tz?' selected':'')+'>'+TZL[k]+'</option>').join('')+'</select></div><div><label>PIN baru (kosongkan jika tidak diubah)</label><input id="np" type="password" inputmode="numeric" autocomplete="off"></div><div class="row"><button class="btn g" data-a="x">Batal</button><button class="btn" id="ok">Simpan</button></div>');
+  $('f1').onchange=e=>e.target.files[0]&&fit(e.target.files[0],220,d=>pf=d);
+  $('f2').onchange=e=>e.target.files[0]&&fit(e.target.files[0],900,d=>cv=d);
+  $('ok').onclick=async()=>{const np=$('np').value;S.shop={...s,name:$('n').value.trim()||'Toko',tag:$('t').value,wa:$('w').value.replace(/\D/g,''),address:$('ad').value,days:$('dy').value,open:$('o').value||'10:00',close:$('c').value||'22:00',tz:$('z').value,profile:pf,cover:cv,pinHash:np?await hash(np):s.pinHash};mark();close();renderAll()};
+}
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-a],[data-c]');if(!t)return;
+  if(t.dataset.c!==undefined){F.cat=t.dataset.c;renderList();return}
+  const a=t.dataset.a,id=+t.dataset.id;
+  if(a==='add'){cart[id]=(cart[id]||0)+1;saveCart();renderList();toast('Ditambahkan ke keranjang')}
+  else if(a==='plus'){cart[id]++;saveCart();cartM();renderList()}
+  else if(a==='minus'){cart[id]--;if(cart[id]<1)delete cart[id];saveCart();cartM();renderList()}
+  else if(a==='clear'){cart={};saveCart();close();renderList()}
+  else if(a==='cart')cartM();
+  else if(a==='x')close();
+  else if(a==='login')loginM();
+  else if(a==='out'){edit=false;try{sessionStorage.removeItem('adm')}catch(e){}renderAll()}
+  else if(a==='new')prodM();
+  else if(a==='edit')prodM(id);
+  else if(a==='del')ask('Hapus produk ini?',()=>{S.products=S.products.filter(p=>p.id!==id);mark();renderList()});
+  else if(a==='yes'){const f=ask_cb;close();f&&f()}
+  else if(a==='set')setM();
+  else if(a==='save')saveAll();
+});
+(function(){let ok=false;try{ok=localStorage.getItem('age21')==='1'}catch(e){}
+  if(ok)return;
+  modal('<h2>Verifikasi Usia</h2><p>Situs ini menjual produk vape yang hanya boleh dibeli oleh orang berusia 21 tahun ke atas. Apakah usia Anda sudah 21 tahun atau lebih?</p><div class="row"><button class="btn g" id="no">Belum</button><button class="btn" id="yes">Ya, 21+</button></div>');
+  $('yes').onclick=()=>{try{localStorage.setItem('age21','1')}catch(e){}close()};
+  $('no').onclick=()=>{$('root').innerHTML='<div style="padding:40px;text-align:center">Maaf, Anda belum dapat mengakses situs ini.</div>';$('modal').innerHTML=''};
+})();
+renderAll();
+</script>
+</body>
+</html>
